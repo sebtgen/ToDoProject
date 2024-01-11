@@ -1,0 +1,18 @@
+<form #form="ngForm" (submit)="onSubmit(form)" [class.submitted]="service.formSubmitted" novalidate>
+  <input type="hidden" name="taskDetailId" [value]="service.formData.taskDetailId" />
+  <div class="mb-3">
+    <!-- <label>Task:</label> -->
+    <input class="form-control form-control-lg" #cardOwnerName="ngModel" name="taskDescription" placeholder="Write task"
+      [(ngModel)]="service.formData.taskDescription" required minlength="2" maxlength="255" />
+  </div>
+
+  <div class="d-grid">
+    <div class="d-flex">
+      <button class="btn btn-lg btn-success flex-grow-1">
+        Submit
+      </button>
+
+
+    </div>
+  </div>
+</form>
