@@ -19,6 +19,7 @@ export class TaskDetailsComponent implements OnInit {
 
   populateForm(selectedRecord: TaskDetail) {
     this.service.formData = Object.assign({}, selectedRecord);
+    this.toggleForm(false);
   }
 
   onDelete(id: number) {
@@ -36,8 +37,14 @@ export class TaskDetailsComponent implements OnInit {
   showTaskDetailForm: boolean = false;
   showTaskList: boolean = true;
 
-  toggleForm() {
+  toggleForm(newTask: boolean) {
     this.showTaskDetailForm = !this.showTaskDetailForm;
     this.showTaskList = !this.showTaskDetailForm;
+    if (newTask) {
+      this.service.formData = {
+        taskDetailId: 0,
+        taskDescription: '',
+      };
+    }
   }
 }

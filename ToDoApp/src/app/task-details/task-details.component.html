@@ -1,5 +1,6 @@
-<div class="bg-body-secondary text-center py-5 rounded-2">
-  <h1 class="display-6 fw-bold">To do application</h1>
+<div class="bg-body-secondary text-center py-2 rounded-2 mb-3" style="background-color: #F0F0F0;">
+  <h1 class="display-6 fw-bold" style="color: #000000; text-shadow: 2px 2px 4px #C0C0C0; letter-spacing: 1.5px;">To-Do
+    App</h1>
 </div>
 
 <div class="container mt-5">
@@ -23,24 +24,18 @@
 
       <div class="d-grid">
         <div class="d-flex">
-          <button class="btn btn-primary flex-grow-1" *ngIf="!showTaskDetailForm" (click)="toggleForm()">
+          <button class="btn btn-primary flex-grow-1" *ngIf="!showTaskDetailForm" (click)="toggleForm(true)">
             Add
           </button>
 
-          <!-- <span>
-            <i class="fa-solid fa-plus mouse-hover flex-grow-1" *ngIf="!showTaskDetailForm" (click)="toggleForm()"></i>
-          </span> -->
-
           <i class="fa-solid fa-arrow-left flex-grow-1 mouse-hover " *ngIf="showTaskDetailForm"
-            (click)="toggleForm()"></i>
-          <!-- <button class="btn btn-secondary flex-grow-1" *ngIf="showTaskDetailForm" (click)="toggleForm()">
-            Cancel
-          </button> -->
+            (click)="toggleForm(false)"></i>
+
           <br>
 
         </div>
         <br>
-        <app-task-detail-form *ngIf="showTaskDetailForm"></app-task-detail-form>
+        <app-task-detail-form *ngIf="showTaskDetailForm" (formSubmitted)="toggleForm(true)"></app-task-detail-form>
 
       </div>
     </div>

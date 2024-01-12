@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { TaskDetailService } from '../shared/task-detail.service';
 import { FormsModule, NgForm } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -12,6 +12,7 @@ import { TaskDetail } from '../shared/task-detail.model';
   styleUrl: './task-detail-form.component.css',
 })
 export class TaskDetailFormComponent {
+  @Output() formSubmitted = new EventEmitter<void>();
   constructor(public service: TaskDetailService) {}
 
   onSubmit(form: NgForm) {
@@ -23,6 +24,7 @@ export class TaskDetailFormComponent {
       } else {
         this.updateRecord(form);
       }
+      this.formSubmitted.emit();
     }
   }
 

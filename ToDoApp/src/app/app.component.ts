@@ -4,7 +4,7 @@ import { RouterOutlet } from '@angular/router';
 import { TaskDetailsComponent } from './task-details/task-details.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-// FALTA EL COSO DE TOAST
+// FALTA TOAST
 @Component({
   selector: 'app-root',
   standalone: true,
