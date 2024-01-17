@@ -1,6 +1,8 @@
-## This is a simple CRUD ToDo application built using C# for the API and Angular for the frontend. The application allows users to manage their tasks by adding, editing, and removing them. Tasks are stored in a SQL database, providing a persistent storage solution.
+# ToDo CRUD Application
 
-### Features:
+This is a simple CRUD ToDo application built using C# for the API and Angular for the frontend. The application allows users to manage their tasks by adding, editing, and removing them. Tasks are stored in a SQL database, providing a persistent storage solution.
+
+## Features
 
 Create: Add new tasks to your to-do list.
 
