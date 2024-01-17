@@ -4,7 +4,8 @@ import { RouterOutlet } from '@angular/router';
 import { TaskDetailsComponent } from './task-details/task-details.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-// FALTA TOAST
+import { HotToastModule } from '@ngneat/hot-toast';
+
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -16,6 +17,7 @@ import { FormsModule } from '@angular/forms';
     TaskDetailsComponent,
     HttpClientModule,
     FormsModule,
+    HotToastModule,
   ],
 })
 export class AppComponent {

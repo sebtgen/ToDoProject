@@ -3,6 +3,7 @@ import { TaskDetailService } from '../shared/task-detail.service';
 import { FormsModule, NgForm } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { TaskDetail } from '../shared/task-detail.model';
+import { HotToastService } from '@ngneat/hot-toast';
 
 @Component({
   selector: 'app-task-detail-form',
@@ -13,7 +14,10 @@ import { TaskDetail } from '../shared/task-detail.model';
 })
 export class TaskDetailFormComponent {
   @Output() formSubmitted = new EventEmitter<void>();
-  constructor(public service: TaskDetailService) {}
+  constructor(
+    public service: TaskDetailService,
+    private toast: HotToastService
+  ) {}
 
   onSubmit(form: NgForm) {
     this.service.formSubmitted = true;
@@ -34,6 +38,7 @@ export class TaskDetailFormComponent {
         console.log(res);
         this.service.refreshList();
         this.service.resetForm(form);
+        this.toast.success('Successfully added task!');
       },
       error: (err) => {
         console.log(err);
@@ -47,6 +52,7 @@ export class TaskDetailFormComponent {
         this.service.refreshList();
         this.service.list = res as TaskDetail[];
         this.service.resetForm(form);
+        this.toast.info('Successfully edited task!');
       },
       error: (err) => {
         console.log(err);

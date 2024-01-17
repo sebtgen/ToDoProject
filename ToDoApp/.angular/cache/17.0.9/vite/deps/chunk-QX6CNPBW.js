@@ -3078,6 +3078,9 @@ var NEVER = new Observable(noop);
 
 // node_modules/rxjs/dist/esm5/internal/util/argsOrArgArray.js
 var isArray3 = Array.isArray;
+function argsOrArgArray(args) {
+  return args.length === 1 && isArray3(args[0]) ? args[0] : args;
+}
 
 // node_modules/rxjs/dist/esm5/internal/operators/filter.js
 function filter(predicate, thisArg) {
@@ -3087,6 +3090,35 @@ function filter(predicate, thisArg) {
       return predicate.call(thisArg, value, index++) && subscriber.next(value);
     }));
   });
+}
+
+// node_modules/rxjs/dist/esm5/internal/observable/race.js
+function race() {
+  var sources = [];
+  for (var _i = 0; _i < arguments.length; _i++) {
+    sources[_i] = arguments[_i];
+  }
+  sources = argsOrArgArray(sources);
+  return sources.length === 1 ? innerFrom(sources[0]) : new Observable(raceInit(sources));
+}
+function raceInit(sources) {
+  return function(subscriber) {
+    var subscriptions = [];
+    var _loop_1 = function(i2) {
+      subscriptions.push(innerFrom(sources[i2]).subscribe(createOperatorSubscriber(subscriber, function(value) {
+        if (subscriptions) {
+          for (var s = 0; s < subscriptions.length; s++) {
+            s !== i2 && subscriptions[s].unsubscribe();
+          }
+          subscriptions = null;
+        }
+        subscriber.next(value);
+      })));
+    };
+    for (var i = 0; subscriptions && !subscriber.closed && i < sources.length; i++) {
+      _loop_1(i);
+    }
+  };
 }
 
 // node_modules/rxjs/dist/esm5/internal/operators/catchError.js
@@ -23271,6 +23303,7 @@ export {
   defer,
   forkJoin,
   filter,
+  race,
   catchError,
   concatMap,
   defaultIfEmpty,
@@ -23742,4 +23775,4 @@ export {
    * found in the LICENSE file at https://angular.io/license
    *)
 */
-//# sourceMappingURL=chunk-THWPMT2E.js.map
+//# sourceMappingURL=chunk-QX6CNPBW.js.map

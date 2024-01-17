@@ -3,6 +3,8 @@ import { TaskDetailFormComponent } from '../task-detail-form/task-detail-form.co
 import { TaskDetailService } from '../shared/task-detail.service';
 import { CommonModule } from '@angular/common';
 import { TaskDetail } from '../shared/task-detail.model';
+import { HotToastService } from '@ngneat/hot-toast';
+
 @Component({
   selector: 'app-task-details',
   standalone: true,
@@ -11,7 +13,10 @@ import { TaskDetail } from '../shared/task-detail.model';
   imports: [TaskDetailFormComponent, CommonModule],
 })
 export class TaskDetailsComponent implements OnInit {
-  constructor(public service: TaskDetailService) {}
+  constructor(
+    public service: TaskDetailService,
+    private toast: HotToastService
+  ) {}
 
   ngOnInit(): void {
     this.service.refreshList();
@@ -27,6 +32,7 @@ export class TaskDetailsComponent implements OnInit {
       next: (res) => {
         console.log(res);
         this.service.refreshList();
+        this.toast.error('Successfully deleted task!');
       },
       error: (err) => {
         console.log(err);
